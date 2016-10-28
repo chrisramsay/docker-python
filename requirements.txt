@@ -1,4 +1,6 @@
 ipython
+pylint
 beautifulsoup4
 jupyter
 selenium
+ephem
