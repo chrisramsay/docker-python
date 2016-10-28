@@ -63,5 +63,4 @@ gnupg/*
 !gnupg/README.md
 ssh/*
 !ssh/README.md
-*.sh
-!files/jupyter.sh
+/*.sh
