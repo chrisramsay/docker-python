@@ -8,7 +8,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
 dist/
 downloads/
@@ -55,3 +54,13 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Project stuff
+.gitconfig
+git/*
+!git/README.md
+gnupg/*
+!gnupg/README.md
+ssh/*
+!ssh/README.md
+*.sh
