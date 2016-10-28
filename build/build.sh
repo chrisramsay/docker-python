@@ -5,7 +5,7 @@ BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 VCS_REF=$(git rev-parse HEAD)
 VCS_URL=$(git config --get remote.origin.url)
 VERSION=$(cat VERSION)
-IMAGE=chrisramsay/docker-pelican
+IMAGE=chrisramsay/docker-python
 
 do_build_latest()
 {
