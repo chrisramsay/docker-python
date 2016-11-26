@@ -1,16 +1,23 @@
 #!/bin/bash
 
-# Maps HTTP server 8888 to 80 externally
-# Makes work directory appear in /project
+###
+# Add more mounts for your projects after the git/gnupg/ssh ones
+# e.g. -v ~/stuff/myproject:/project \
+
 wd=$(pwd)
-docker rm -f pythondevbox
+img=docker-python
+if docker ps | grep $img | awk '{ print $11 }'
+    then
+    com=$(docker rm -f $img)
+    echo "Removed ${com}"
+fi
 docker run \
---name pythondevbox \
+--name $img \
 -p 82:8888 \
 -v $wd/git/.gitconfig:/root/.gitconfig \
 -v $wd/gnupg:/root/.gnupg \
 -v $wd/ssh:/root/.ssh \
--v ~/Stuff:/project \
+-v ~/stuff/myproject:/project \
 -ti \
-chrisramsay/docker-python-devel \
+chrisramsay/$img:latest \
 /bin/bash

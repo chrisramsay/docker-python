@@ -28,7 +28,11 @@ WORKDIR /srv
 ADD ./requirements.txt /srv/requirements.txt
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN mkdir /root/.jupyter
 
 ADD files/jupyter.sh /srv/jupyter.sh
+ADD files/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 ADD files/bashrc /root/.bashrc
+ADD build/VERSION /root/VERSION
 RUN chmod 700 /srv/jupyter.sh
+RUN jupyter nbextensions_configurator enable --user
