@@ -174,6 +174,7 @@
 ## Dict of Python modules to load as notebook server extensions.Entry values can
 #  be used to enable and disable the loading ofthe extensions.
 #c.NotebookApp.nbserver_extensions = {}
+#c.NotebookApp.setdefault('nbserver_extensions', {})['jupyter_nbextensions_configurator'] = True
 
 ## The directory to use for notebooks and kernels.
 c.NotebookApp.notebook_dir = u'/project/ipynbs'
