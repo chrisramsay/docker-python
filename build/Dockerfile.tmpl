@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:latest
 MAINTAINER Chris Ramsay <chris@ramsay-family.net>
 
 ENV HOME /root
@@ -20,26 +20,29 @@ LABEL org.label-schema.build-date="r_BUILD_DATE" \
 
 # Update and install some stuff
 RUN apt-get -y update && apt-get install -y \
-python \
-python-dev \
-python-pip \
-git
+git \
+pandoc
 
 # Upgrade and install Python packages
 WORKDIR /srv
-ADD ./requirements.txt /srv/requirements.txt
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+RUN bash ~/miniconda.sh -b -p $HOME/miniconda
+RUN export PATH="$HOME/miniconda/bin:$PATH"
+
+
+#ADD ./requirements.txt /srv/requirements.txt
+#RUN pip install --upgrade pip
+#RUN pip install -r requirements.txt
 
 # Shell bits
 ADD files/bashrc /root/.bashrc
 ADD build/VERSION /root/VERSION
 
 # Some bits to get Jupyter working
-RUN mkdir /root/.jupyter
-ADD files/jupyter.sh /srv/jupyter.sh
-ADD files/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
-RUN chmod 700 /srv/jupyter.sh
-RUN jupyter nbextensions_configurator enable --user
-RUN jupyter nbextension enable --py widgetsnbextension
-RUN jupyter contrib nbextension install --user
+#RUN mkdir /root/.jupyter
+#ADD files/jupyter.sh /srv/jupyter.sh
+#ADD files/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
+#RUN chmod 700 /srv/jupyter.sh
+#RUN jupyter nbextensions_configurator enable --user
+#RUN jupyter nbextension enable --py widgetsnbextension
+#RUN jupyter contrib nbextension install --user
