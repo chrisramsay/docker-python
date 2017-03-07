@@ -25,15 +25,25 @@ RUN apt-get -y update && apt-get install -y \
 
 # Upgrade and install Python packages
 WORKDIR /srv
+ADD conda_envs/root.txt /srv/root.txt
+ADD conda_envs/py27.txt /srv/py27.txt
+ADD conda_envs/py36.txt /srv/py36.txt
+
 RUN curl -LO http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh && \
     bash Miniconda-latest-Linux-x86_64.sh -p /miniconda -b && \
     rm Miniconda-latest-Linux-x86_64.sh
 ENV PATH=${PATH}:/miniconda/bin
-RUN conda update -y conda
-RUN conda create -n py27 python=2.7 ipykernel && \
+
+RUN conda update -yq conda && \
+    conda install jupyter && \
+    conda install -c conda-forge jupyter_nbextensions_configurator && \
+    conda install -c conda-forge jupyter_contrib_nbextensions
+
+RUN conda create -n py27 python=2.7 --file /srv/py27.txt && \
     /bin/bash -c "source activate py27" && \
     /miniconda/envs/py27/bin/ipython kernel install --user
-RUN conda create -n py36 python=3.6 ipykernel && \
+
+RUN conda create -n py36 python=3.6 --file /srv/py36.txt && \
     /bin/bash -c "source activate py36" && \
     /miniconda/envs/py36/bin/ipython kernel install --user
 
@@ -46,6 +56,3 @@ RUN mkdir /root/.jupyter
 ADD files/jupyter.sh /srv/jupyter.sh
 ADD files/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 RUN chmod 700 /srv/jupyter.sh
-#RUN jupyter nbextensions_configurator enable --user
-#RUN jupyter nbextension enable --py widgetsnbextension
-#RUN jupyter contrib nbextension install --user
