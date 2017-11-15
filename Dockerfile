@@ -7,14 +7,14 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG VCS_URL
 ARG VERSION
-LABEL org.label-schema.build-date="r_BUILD_DATE" \
+LABEL org.label-schema.build-date="2017-11-15T08:59:40Z" \
       org.label-schema.name="aws-gen" \
       org.label-schema.description="Machine for programming with Python" \
       org.label-schema.url="https://github.com/chrisramsay/docker-python" \
-      org.label-schema.vcs-ref="r_VCS_REF" \
-      org.label-schema.vcs-url="r_VCS_URL" \
+      org.label-schema.vcs-ref="15a2db5012908b86690f0975fcf48017d8a51c8d" \
+      org.label-schema.vcs-url="git@github.com:chrisramsay/docker-python.git" \
       org.label-schema.vendor="Chris Ramsay" \
-      org.label-schema.version="r_VERSION" \
+      org.label-schema.version="1.0.0" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.maintainer="Chris Ramsay <chris@ramsay-family.net>"
 
