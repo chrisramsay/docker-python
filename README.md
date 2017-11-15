@@ -25,7 +25,7 @@ Used in order to reinstate the normal `Dockerfile` for continuing development. U
 * Bump the version number in `build/VERSION`
 * Run `$ ./build.sh restore` to set up a clean `Dockerfile`
 * Make any required changes to `build/Dockerfile.tmpl`
-* Run `$ ./build.sh build-latest` to build current tag and latest
+* Run `$ ./build.sh build` to build current tag and latest
 * Once all the work is complete, run `$ ./build.sh release`
 * Merge and tag the release
 
