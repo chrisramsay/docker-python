@@ -1,5 +1,4 @@
 FROM python:latest
-MAINTAINER Chris Ramsay <chris@ramsay-family.net>
 
 ENV HOME /root
 
@@ -16,7 +15,8 @@ LABEL org.label-schema.build-date="r_BUILD_DATE" \
       org.label-schema.vcs-url="r_VCS_URL" \
       org.label-schema.vendor="Chris Ramsay" \
       org.label-schema.version="r_VERSION" \
-      org.label-schema.schema-version="1.0"
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.maintainer="Chris Ramsay <chris@ramsay-family.net>"
 
 # Update and install some stuff
 RUN apt-get -y update && apt-get install -y \
@@ -25,7 +25,7 @@ RUN apt-get -y update && apt-get install -y \
 
 # Upgrade and install Python packages
 WORKDIR /srv
-ADD conda_envs/root.txt /srv/root.txt
+ADD conda_envs/README.md /srv/README.md
 ADD conda_envs/py27.txt /srv/py27.txt
 ADD conda_envs/py36.txt /srv/py36.txt
 
